@@ -30,7 +30,7 @@ jobs:
           version: 12.x
 
       # Runs a set of commands using the runners shell
-      - name: Build gatsby site
+      - name: Build kobilica site
         run: |
           yarn install
           yarn build

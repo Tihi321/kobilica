@@ -1,4 +1,4 @@
-import { PlaneGeometry, BufferAttribute } from "three";
+import { PlaneGeometry, BufferAttribute, Camera } from "three";
 import { tween } from "shifty";
 import {
   getZIndex,
@@ -8,10 +8,11 @@ import {
   getYIndex,
 } from "./objects";
 import {
-  OCEAN_BLUE_COLOR,
-  LIGHT_BUE_COLOR,
+  ColorOceanBlue,
   CAMERA_POSITION_KEYS,
-} from "../constants";
+  ColorLightBlue,
+} from "../constants/index";
+import type { TPostition } from "../types";
 
 export const world = {
   sea: {
@@ -56,7 +57,7 @@ export const world = {
   },
 };
 
-export const generatePlaneGeometry = (worldObj) =>
+export const generatePlaneGeometry = (worldObj: typeof world) =>
   new PlaneGeometry(
     worldObj.sea.width,
     worldObj.sea.height,
@@ -64,7 +65,7 @@ export const generatePlaneGeometry = (worldObj) =>
     worldObj.sea.heightS
   );
 
-export const randomizePlaneVertices = (planeElement) => {
+export const randomizePlaneVertices = (planeElement: any) => {
   const { array: planeArray } = planeElement.geometry.attributes.position;
   let randomValues = [];
   loopMeshGeometry(planeElement, ({ index, z, x, y }) => {
@@ -79,7 +80,7 @@ export const randomizePlaneVertices = (planeElement) => {
   planeElement.geometry.attributes.position.randomValues = randomValues;
 };
 
-export const animatePlaneVertices = (planeElement, frame) => {
+export const animatePlaneVertices = (planeElement: any, frame: number) => {
   const {
     array: planeArray,
     originalPosition,
@@ -100,21 +101,21 @@ export const animatePlaneVertices = (planeElement, frame) => {
   planeElement.geometry.attributes.position.needsUpdate = true;
 };
 
-export const animateMouseOverVerticesColors = (intersectPlane) => {
+export const animateMouseOverVerticesColors = (intersectPlane: any) => {
   if (intersectPlane.length > 0) {
     const { a, c } = intersectPlane[0].face;
     const { color } = intersectPlane[0].object.geometry.attributes;
 
     tween({
       from: {
-        r: LIGHT_BUE_COLOR[0],
-        g: LIGHT_BUE_COLOR[1],
-        b: LIGHT_BUE_COLOR[2],
+        r: ColorLightBlue.R,
+        g: ColorLightBlue.G,
+        b: ColorLightBlue.B,
       },
       to: {
-        r: OCEAN_BLUE_COLOR[0],
-        g: OCEAN_BLUE_COLOR[1],
-        b: OCEAN_BLUE_COLOR[2],
+        r: ColorOceanBlue.R,
+        g: ColorOceanBlue.G,
+        b: ColorOceanBlue.B,
       },
       duration: 1500,
       easing: "easeOutQuad",
@@ -131,7 +132,7 @@ export const animateMouseOverVerticesColors = (intersectPlane) => {
   }
 };
 
-export const animateCameraPostion = (camera, position) => {
+export const animateCameraPostion = (camera: Camera, position: TPostition) => {
   if (
     camera.position.x !== position.x ||
     camera.position.y !== position.y ||
@@ -159,10 +160,10 @@ export const animateCameraPostion = (camera, position) => {
   }
 };
 
-export const generateColors = (count) =>
+export const generateColors = (count: number) =>
   new BufferAttribute(
     new Float32Array(
-      rangeReduce(count, (acc) => [...acc, ...OCEAN_BLUE_COLOR], [])
+      rangeReduce(count, (acc) => [...acc, ColorOceanBlue.R, ColorOceanBlue.G, ColorOceanBlue.B], [])
     ),
     3
   );

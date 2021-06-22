@@ -1,5 +1,5 @@
 import * as dat from "dat.gui";
-import { EVENTS, CAMERA_POSITIONS } from "./constants";
+import { Events, CAMERA_POSITIONS } from "./constants/index";
 import {
   normalizeXCoordinate,
   normalizeYCoordinate,
@@ -12,7 +12,7 @@ import {
   animatePlaneVertices,
   animateMouseOverVerticesColors,
   animateCameraPostion,
-} from "./utils";
+} from "./utils/index";
 import {
   Scene,
   PerspectiveCamera,
@@ -28,36 +28,40 @@ import {
   PointsMaterial,
   Points,
   Float32BufferAttribute,
+  Vector2,
 } from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import type { TMouse, TPostition } from "./types";
 
 export class Background {
-  frame = 0;
-  cameraCustom = false;
-  cameraPosition = CAMERA_POSITIONS[0];
-  mouse = {
+  private showGui: boolean = false;
+  private frame: number = 0;
+  private cameraCustom: boolean = false;
+  private cameraPosition: string = CAMERA_POSITIONS[0];
+  private mouse: TMouse = {
     x: undefined,
     y: undefined,
   };
 
-  appElement;
-  elementWidth;
-  elementHeight;
-  renderer;
-  composer;
-  raycaster;
-  camera;
-  scene;
-  sea;
-  stars;
-  directionalLight;
-  ambientLight;
+  private appElement: HTMLElement;
+  private elementWidth: number;
+  private elementHeight: number;
+  private renderer: WebGLRenderer;
+  private composer: EffectComposer;
+  private raycaster: Raycaster;
+  private camera: PerspectiveCamera;
+  private scene: Scene;
+  private sea: Mesh;
+  private stars: Points;
+  private directionalLight: DirectionalLight;
+  private ambientLight: AmbientLight;
 
-  constructor(canvasElement) {
+  constructor(canvasElement: HTMLElement, showGui = false) {
     this.appElement = canvasElement;
+    this.showGui = showGui;
 
     this.elementWidth = this.appElement.getBoundingClientRect().width;
     this.elementHeight = this.appElement.getBoundingClientRect().height;
@@ -79,7 +83,9 @@ export class Background {
     this.addOnMouseMove();
     this.addCameraPositionEventListeners();
 
-    // this.addGUI();
+    if (this.showGui) {
+      this.addGUI();
+    }
   };
 
   addGUI = () => {
@@ -169,10 +175,10 @@ export class Background {
     const renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(renderPass);
 
-    const unrealBloomPass = new UnrealBloomPass(5, 0.3, 5, 0.4);
+    const unrealBloomPass = new UnrealBloomPass(new Vector2(5), 0.3, 5, 0.4);
     this.composer.addPass(unrealBloomPass);
 
-    const filmPass = new FilmPass(0.4, 0.3, 20, false);
+    const filmPass = new FilmPass(0.4, 0.3, 20, 0);
     filmPass.renderToScreen = true;
     this.composer.addPass(filmPass);
   };
@@ -181,7 +187,7 @@ export class Background {
     const seaGeometry = generatePlaneGeometry(world);
     const seaMaterial = new MeshPhongMaterial({
       side: DoubleSide,
-      flatShading: FlatShading,
+      flatShading: FlatShading as unknown as boolean,
       vertexColors: true,
     });
     this.sea = new Mesh(seaGeometry, seaMaterial);
@@ -292,11 +298,11 @@ export class Background {
 
   addCameraPositionEventListeners = () => {
     this.appElement.addEventListener(
-      EVENTS.CAMERA_BACKWARD,
+      Events.CameraBackward,
       this.onCameraPositionBackward
     );
     this.appElement.addEventListener(
-      EVENTS.CAMERA_FORWARD,
+      Events.CameraForward,
       this.onCameraPositionForward
     );
   };
@@ -307,7 +313,7 @@ export class Background {
     this.raycaster.setFromCamera(this.mouse, this.camera);
     const intersectPlane = this.raycaster.intersectObject(this.sea);
 
-    const position = {
+    const position: TPostition = {
       x: this.cameraCustom
         ? world.camera.positionx
         : world.camera.position[this.cameraPosition].x,

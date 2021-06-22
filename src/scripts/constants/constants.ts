@@ -1,0 +1,11 @@
+export const CAMERA_POSITION_KEYS = {
+  ONE: "one",
+  TWO: "two",
+  THREE: "three",
+};
+
+export const CAMERA_POSITIONS = [
+  CAMERA_POSITION_KEYS.ONE,
+  CAMERA_POSITION_KEYS.TWO,
+  CAMERA_POSITION_KEYS.THREE,
+];

@@ -1,4 +1,4 @@
-export const domReady = (callback) => {
+export const domReady = (callback: any) => {
   return document.readyState === "interactive" ||
     document.readyState === "complete"
     ? callback()

@@ -1,12 +1,12 @@
 import "./styles/style.css";
 import { addBackground } from "./scripts";
 
-import App from './App.svelte'
+import Content from './Content.svelte'
 
-const app = new App({
-  target: document.querySelector('.main')
+const content = new Content({
+  target: document.querySelector('.content')
 });
 
 addBackground(false);
 
-export default app
+export default content

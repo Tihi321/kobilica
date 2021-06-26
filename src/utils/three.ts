@@ -11,7 +11,7 @@ import {
   ColorOceanBlue,
   CAMERA_POSITION_KEYS,
   ColorLightBlue,
-} from "../constants/index";
+} from "../constants";
 import type { TPostition } from "../types";
 
 export const world = {
@@ -35,17 +35,17 @@ export const world = {
       [CAMERA_POSITION_KEYS.ONE]: {
         x: -3.6,
         y: -9,
-        z: 0.6,
+        z: 1.6,
       },
       [CAMERA_POSITION_KEYS.TWO]: {
         x: -6.1,
         y: 3.1,
-        z: 0.75,
+        z: 1.75,
       },
       [CAMERA_POSITION_KEYS.THREE]: {
         x: 0,
         y: 2.6,
-        z: 0.6,
+        z: 1.6,
       },
     },
     positionx: -3.6,

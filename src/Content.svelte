@@ -1,9 +1,17 @@
 <script lang="ts">
-  import Counter from "./components/Counter.svelte";
+  import Slider from "./components/Slider.svelte";
   import Header from "./components/Header.svelte";
 </script>
 
 <main>
   <Header />
-  <Counter />
+  <Slider />
 </main>
+
+<style>
+  main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

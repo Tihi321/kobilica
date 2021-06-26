@@ -1,6 +1,5 @@
 import { Background } from "./Background";
-import { Events } from "./constants/index";
-import { domReady } from "./utils/index";
+import { domReady } from "../utils/index";
 
 export const addBackground = (showGui: boolean = false) => {
   domReady(() => {
@@ -15,20 +14,6 @@ export const addBackground = (showGui: boolean = false) => {
     };
   
     animate();
-  
-    addEventListener("keyup", (event) => {
-      if (event.key === "ArrowRight") {
-        const event = new CustomEvent(Events.CameraForward);
-        backgroundElement.dispatchEvent(event);
-      }
-      if (event.key === "ArrowLeft") {
-        const event = new CustomEvent(Events.CameraBackward);
-        backgroundElement.dispatchEvent(event);
-      }
-    });
-  
-    console.log(window);
-  
     
     if (showGui) {
       const contentElement = document.querySelector(".content") as HTMLElement;

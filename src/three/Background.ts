@@ -1,5 +1,5 @@
 import * as dat from "dat.gui";
-import { Events, CAMERA_POSITIONS } from "./constants/index";
+import { Events, CAMERA_POSITIONS, CAMERA_POSITION_KEYS } from "../constants";
 import {
   normalizeXCoordinate,
   normalizeYCoordinate,
@@ -12,7 +12,7 @@ import {
   animatePlaneVertices,
   animateMouseOverVerticesColors,
   animateCameraPostion,
-} from "./utils/index";
+} from "../utils/index";
 import {
   Scene,
   PerspectiveCamera,
@@ -34,7 +34,7 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
-import type { TMouse, TPostition } from "./types";
+import type { TMouse, TPostition } from "../types";
 
 export class Background {
   private showGui: boolean = false;
@@ -280,6 +280,35 @@ export class Background {
     });
   };
 
+  setCameraPositionOne = () => {
+    this.cameraPosition = CAMERA_POSITIONS[0];
+  }
+
+  setCameraPositionTwo = () => {
+    this.cameraPosition = CAMERA_POSITIONS[1];
+  }
+
+  setCameraPositionThree = () => {
+    this.cameraPosition = CAMERA_POSITIONS[2];
+  }
+
+  onCameraPostion = (event: CustomEvent) => {
+    switch (event.detail) {
+      case CAMERA_POSITION_KEYS.ONE:
+        this.cameraPosition = CAMERA_POSITION_KEYS.ONE;
+        break;
+      case CAMERA_POSITION_KEYS.TWO:
+        this.cameraPosition = CAMERA_POSITION_KEYS.TWO;
+        break;
+      case CAMERA_POSITION_KEYS.THREE:
+        this.cameraPosition = CAMERA_POSITION_KEYS.THREE;
+        break;
+    
+      default:
+        break;
+    }
+  };
+
   onCameraPositionForward = () => {
     const index = CAMERA_POSITIONS.indexOf(this.cameraPosition);
     this.cameraPosition =
@@ -305,6 +334,10 @@ export class Background {
       Events.CameraForward,
       this.onCameraPositionForward
     );
+    this.appElement.addEventListener(
+      Events.CameraPosition,
+      this.onCameraPostion
+    );
   };
 
   animate = () => {
@@ -327,7 +360,6 @@ export class Background {
 
     this.stars.rotation.z += 0.0001;
     this.stars.rotation.y += 0.0001;
-    this.scene.rotation.z += 0.0001;
 
     animateCameraPostion(this.camera, position);
     animatePlaneVertices(this.sea, this.frame);

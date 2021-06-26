@@ -1,5 +1,5 @@
 import "./styles/style.css";
-import { addBackground } from "./scripts";
+import { addBackground } from "./three"
 
 import Content from './Content.svelte'
 

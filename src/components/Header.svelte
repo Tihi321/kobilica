@@ -70,15 +70,20 @@
   .header {
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .logo {
-    max-width: 250px;
+    max-width: 80px;
   }
 
   ul {
     list-style: none;
     display: flex;
+    padding: 0;
+    width: 100%;
+    margin: 10px 0;
+    justify-content: center;
   }
 
   .link {
@@ -101,8 +106,15 @@
   }
 
   @media (min-width: 480px) {
+    .header {
+      justify-content: space-between;
+    }
     .logo {
       max-width: 150px;
+    }
+
+    ul {
+      width: auto;
     }
   }
 </style>

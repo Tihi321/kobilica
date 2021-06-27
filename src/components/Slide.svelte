@@ -13,11 +13,10 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
-    min-height: 400px;
-    transform: translate(-50%, -50%);
+    min-height: 100%;
     opacity: 1;
     z-index: 1;
     transition: opacity 0.8s ease;
@@ -26,12 +25,17 @@
     color: #2a2a57;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 24px;
-    border-radius: 10px;
     text-align: justify;
   }
 
   .hide {
     opacity: 0;
     z-index: 0;
+  }
+
+  @media (min-width: 780px) {
+    div {
+      border-radius: 10px;
+    }
   }
 </style>

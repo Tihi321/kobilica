@@ -15,21 +15,13 @@ body {
   background-image: linear-gradient(90deg, #4d4d6d 0%, #2a2a57 100%);
 }
 
-.app {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
-}
-
 .content {
   position: relative;
   z-index: 1;
-  width: 100%;
-  height: 100%;
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -42,10 +34,6 @@ body {
   width: 100%;
   height: 100%;
   opacity: 0.3;
-}
-
-canvas {
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.9) inset;
 }
 
 .hidden {

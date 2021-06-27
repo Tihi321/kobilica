@@ -105,7 +105,7 @@
     position: relative;
     order: 1;
     width: 100%;
-    height: 100%;
+    height: 80%;
     overflow: auto;
   }
 
@@ -150,7 +150,6 @@
     }
     .content {
       order: 2;
-      min-height: 400px;
       width: initial;
       flex: 1;
     }

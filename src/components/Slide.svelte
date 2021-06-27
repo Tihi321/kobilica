@@ -13,18 +13,18 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
+    transform: translateY(-50%);
     width: 100%;
-    min-height: 100%;
     opacity: 1;
     z-index: 1;
+    line-height: 1.3em;
+    font-size: 14px;
     transition: opacity 0.8s ease;
-    line-height: 1.5em;
-    font-size: 16px;
     color: #2a2a57;
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 24px;
+    padding: 15px 24px;
     text-align: justify;
   }
 
@@ -36,6 +36,10 @@
   @media (min-width: 780px) {
     div {
       border-radius: 10px;
+      min-height: 400px;
+      padding: 24px;
+      font-size: 16px;
+      line-height: 1.5em;
     }
   }
 </style>

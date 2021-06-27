@@ -1,13 +1,26 @@
 <div class="container">
-  <slot />
+  <div class="container-inner">
+    <slot />
+  </div>
 </div>
 
 <style>
   .container {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+  }
+
+  .container-inner {
     width: 100%;
     max-width: 900px;
-    height: 100%;
-    margin: 0 auto;
-    padding: 24px;
+  }
+
+  @media (min-width: 480px) {
+    .container {
+      padding: 24px;
+    }
   }
 </style>

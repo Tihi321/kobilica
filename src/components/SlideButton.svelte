@@ -22,11 +22,7 @@
     cursor: pointer;
     background: none;
     border: none;
-    outline: #ffffff;
-    border-radius: 50%;
-    font-size: 50px;
-    font-weight: 700;
-    color: #ffffff;
+    outline: none;
     opacity: 0.3;
     transition: opacity 0.3s ease;
   }

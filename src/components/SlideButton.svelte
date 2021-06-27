@@ -6,7 +6,15 @@
 </script>
 
 <button on:click>
-  {type === SlideButtonType.Back ? "<" : ">"}
+  {#if type === SlideButtonType.Back}
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="arrow">
+      <path class="arrow-path" d="m 10,3 -5,5 5,5 z" />
+    </svg>
+  {:else}
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="arrow">
+      <path class="arrow-path" d="m 6,3 5,5 -5,5 z" />
+    </svg>
+  {/if}
 </button>
 
 <style>
@@ -26,5 +34,14 @@
   button:hover,
   button:focus {
     opacity: 0.7;
+  }
+
+  .arrow {
+    width: 64px;
+    height: 64px;
+  }
+
+  .arrow-path {
+    fill: #ffffff;
   }
 </style>

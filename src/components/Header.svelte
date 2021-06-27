@@ -41,17 +41,20 @@
   <Container>
     <div class="header">
       <a href="/" class="logo"
-        ><Logo type={LogoType.Mixed} color={LogoColor.Blue} /></a
+        ><Logo type={LogoType.Stroke} color={LogoColor.Blue} /></a
       >
       <ul>
         <li class={$slide === Slides.About && "active"}>
-          <button on:click={sendAbout}>About</button>
+          <button class="link" on:click={sendAbout}>About</button>
         </li>
         <li class={$slide === Slides.Services && "active"}>
-          <button on:click={sendServices}>Services</button>
+          <button class="link" on:click={sendServices}>Services</button>
         </li>
         <li class={$slide === Slides.Contact && "active"}>
-          <button on:click={sendContact}>Contact</button>
+          <button class="link" on:click={sendContact}>Contact</button>
+        </li>
+        <li>
+          <a class="link" href="https://www.tihomir-selak.from.hr/">Blog</a>
         </li>
       </ul>
     </div>
@@ -61,7 +64,7 @@
 <style type="text/css">
   header {
     height: 100px;
-    background: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.8);
   }
 
   .header {
@@ -78,7 +81,7 @@
     display: flex;
   }
 
-  button {
+  .link {
     background: none;
     border: none;
     font-weight: 700;
@@ -87,8 +90,14 @@
     color: #2a2a57;
   }
 
+  a.link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 10px;
+  }
+
   .active {
-    box-shadow: 0 5px 0 0 #f9ce3a;
+    box-shadow: 0 5px 0 0 #2a2a57;
   }
 
   @media (min-width: 480px) {

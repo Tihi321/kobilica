@@ -82,7 +82,8 @@
       </Slide>
       <Slide hide={$slide !== Slides.Contact}>
         <h2 class="title">Contact</h2>
-        <a class="contact-link" href="mailto:tknox@gmail.com">tknox@gmail.com</a
+        <a class="contact-link" href="mailto:tknox.dr@gmail.com"
+          >tknox.dr@gmail.com</a
         >
       </Slide>
     </div>

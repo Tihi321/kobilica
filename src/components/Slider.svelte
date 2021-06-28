@@ -76,6 +76,7 @@
         hours for features, or variable per hour. It can be canceled any time.
         <ul>
           <li>Websites</li>
+          <li>Wordpress Plugins</li>
           <li>Web Applications</li>
           <li>Mobile Applications</li>
         </ul>

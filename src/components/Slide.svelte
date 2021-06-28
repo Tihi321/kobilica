@@ -2,12 +2,12 @@
   export let hide: boolean = false;
 </script>
 
-<div class={hide && "hide"}>
+<div class={hide ? "slide hide" : "slide"}>
   <slot />
 </div>
 
 <style>
-  div {
+  .slide {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,9 +34,10 @@
   }
 
   @media (min-width: 780px) {
-    div {
+    .slide {
       border-radius: 10px;
-      min-height: 400px;
+      min-height: 50vh;
+      max-height: 400px;
       padding: 24px;
       font-size: 16px;
       line-height: 1.5em;
